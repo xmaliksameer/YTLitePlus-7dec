@@ -69,12 +69,9 @@ jobs:
       - name: Install Dependencies
         run: |
           brew install dpkg make
-          # Fixed ldid installation for Xcode 16 compatibility
-          git clone https://github.com/xerub/ldid.git
-          cd ldid
-          make
-          sudo cp ldid /usr/local/bin/ldid
-          cd ..
+          # Fixed ldid2 installation: Use pre-built binary for Xcode 16/macOS 15 compatibility
+          curl -L https://github.com/xerub/ldid/releases/latest/download/ldid2 -o /usr/local/bin/ldid
+          chmod +x /usr/local/bin/ldid
           
       - name: Download Theos
         uses: actions/checkout@v4
